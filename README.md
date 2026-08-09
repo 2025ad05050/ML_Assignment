@@ -55,7 +55,7 @@ at-risk customers with retention offers.
 
 ## c. GitHub Repository Link
 
-> **`<PASTE YOUR GITHUB REPOSITORY LINK HERE AFTER YOU PUSH THE CODE>`**
+> [ML Assignment Repo URL](https://github.com/2025ad05050/ML_Assignment)
 
 Repository contains: `app.py`, `requirements.txt`, `README.md`,
 `test_data.csv`, and the `model/` folder with all training code and
@@ -67,26 +67,26 @@ saved model artifacts.
 
 ### Comparison Table
 
-| ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC |
-|---|---|---|---|---|---|---|
-| Logistic Regression | 0.7388 | 0.8412 | 0.5052 | 0.7807 | 0.6134 | 0.4528 |
-| Decision Tree | 0.7381 | 0.8256 | 0.5041 | 0.8182 | 0.6239 | 0.4703 |
-| kNN | 0.7700 | 0.8084 | 0.5706 | 0.5401 | 0.5549 | 0.4004 |
-| Naive Bayes | 0.6558 | 0.8096 | 0.4269 | 0.8663 | 0.5719 | 0.3951 |
-| Random Forest (Ensemble) | 0.7658 | 0.8409 | 0.5440 | 0.7273 | 0.6224 | 0.4679 |
+| ML Model Name            | Accuracy | AUC    | Precision | Recall | F1     | MCC    |
+|--------------------------|----------|--------|-----------|--------|--------|--------|
+| Logistic Regression      | 0.7388   | 0.8412 | 0.5052    | 0.7807 | 0.6134 | 0.4528 |
+| Decision Tree            | 0.7381   | 0.8256 | 0.5041    | 0.8182 | 0.6239 | 0.4703 |
+| kNN                      | 0.7700   | 0.8084 | 0.5706    | 0.5401 | 0.5549 | 0.4004 |
+| Naive Bayes              | 0.6558   | 0.8096 | 0.4269    | 0.8663 | 0.5719 | 0.3951 |
+| Random Forest (Ensemble) | 0.7658   | 0.8409 | 0.5440    | 0.7273 | 0.6224 | 0.4679 |
 
 *(Metrics computed on the held-out 1,409-row stratified test split;
 `Churn = Yes` is treated as the positive class throughout.)*
 
 ### Observations
 
-| ML Model Name | Observation about model performance |
-|---|---|
-| Logistic Regression | Strong, well-balanced baseline — highest AUC alongside Random Forest (0.8412), and the best trade-off between precision and recall among the linear/simple models. Because coefficients are directly interpretable, it also gives a clear read on which features (e.g., contract type, tenure) push churn risk up or down. |
-| Decision Tree | Highest recall after Naive Bayes (0.8182) — it catches most churners, but at a real cost in precision (0.5041), meaning nearly half of its "will churn" predictions are false alarms. A single tree with `max_depth=6` is also prone to overfitting on this noisy, high-cardinality categorical feature set. |
-| kNN | The weakest recall of all 5 models (0.5401) — it misses roughly 46% of actual churners. This is a direct consequence of the class imbalance: with `k=15` neighbors, majority-class ("No Churn") neighbors dominate local voting, biasing predictions toward the majority class even after scaling. It does have the best precision among the non-Random-Forest models, so predictions it does flag as "churn" are comparatively more trustworthy. |
-| Naive Bayes | Lowest accuracy (0.6558) but by far the highest recall (0.8663) — it flags almost every true churner, at the cost of a flood of false positives (precision only 0.4269). This matches Naive Bayes' known weakness: its independence assumption doesn't hold well for correlated telecom features like `InternetService`, `StreamingTV`, and `StreamingMovies`. |
-| Random Forest (Ensemble) | Best overall balance — highest accuracy (0.7658), second-highest AUC (0.8409), and the best MCC (0.4679), meaning its predictions correlate most reliably with the true labels across both classes. Averaging 300 trees reduces the overfitting seen in the single Decision Tree while keeping recall respectably high (0.7273). |
+| ML Model Name                        | Observation about model performance                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Logistic Regression                  | Strong, well-balanced baseline — highest AUC alongside Random Forest (0.8412), and the best trade-off between precision and recall among the linear/simple models. Because coefficients are directly interpretable, it also gives a clear read on which features (e.g., contract type, tenure) push churn risk up or down.                                                                                                                                                                                                                  |
+| Decision Tree                        | Highest recall after Naive Bayes (0.8182) — it catches most churners, but at a real cost in precision (0.5041), meaning nearly half of its "will churn" predictions are false alarms. A single tree with `max_depth=6` is also prone to overfitting on this noisy, high-cardinality categorical feature set.                                                                                                                                                                                                                                |
+| kNN                                  | The weakest recall of all 5 models (0.5401) — it misses roughly 46% of actual churners. This is a direct consequence of the class imbalance: with `k=15` neighbors, majority-class ("No Churn") neighbors dominate local voting, biasing predictions toward the majority class even after scaling. It does have the best precision among the non-Random-Forest models, so predictions it does flag as "churn" are comparatively more trustworthy.                                                                                           |
+| Naive Bayes                          | Lowest accuracy (0.6558) but by far the highest recall (0.8663) — it flags almost every true churner, at the cost of a flood of false positives (precision only 0.4269). This matches Naive Bayes' known weakness: its independence assumption doesn't hold well for correlated telecom features like `InternetService`, `StreamingTV`, and `StreamingMovies`.                                                                                                                                                                              |
+| Random Forest (Ensemble)             | Best overall balance — highest accuracy (0.7658), second-highest AUC (0.8409), and the best MCC (0.4679), meaning its predictions correlate most reliably with the true labels across both classes. Averaging 300 trees reduces the overfitting seen in the single Decision Tree while keeping recall respectably high (0.7273).                                                                                                                                                                                                            |
 | **Overall Winner for your dataset?** | **Random Forest (Ensemble)** — it has the best MCC (the most reliable single summary metric for imbalanced binary classification, since it accounts for all four confusion-matrix cells) and the best accuracy, while still keeping recall reasonably high. In a real deployment where missing a churner is costlier than a false alarm, **Logistic Regression** is a strong practical runner-up: it matches Random Forest's AUC almost exactly and achieves noticeably higher recall (0.7807 vs. 0.7273), catching more at-risk customers. |
 
 ---
@@ -123,8 +123,7 @@ streamlit run app.py
 
 ## Live App
 
-> **`<PASTE YOUR STREAMLIT COMMUNITY CLOUD LINK HERE AFTER DEPLOYMENT>`**
-
+> [Streamlit App Link](https://github.com/2025ad05050/ML_Assignment)
 ## BITS Virtual Lab Execution Screenshot
 
 > **`<INSERT YOUR OWN SCREENSHOT HERE — must be captured while running this
