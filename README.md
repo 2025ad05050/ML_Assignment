@@ -123,7 +123,7 @@ streamlit run app.py
 
 ## Live App
 
-> [Streamlit App Link](https://github.com/2025ad05050/ML_Assignment)
+> [Streamlit App Link](https://mlassignment-4zvxh5jc88xhostqqhncfy.streamlit.app/)
 ## BITS Virtual Lab Execution Screenshot
 
 > **`<INSERT YOUR OWN SCREENSHOT HERE — must be captured while running this
