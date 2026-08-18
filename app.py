@@ -150,15 +150,21 @@ if df_raw is not None:
         # ---------------------------------------------------------
         st.subheader("🧩 Confusion Matrix")
         cm = confusion_matrix(y_true, y_pred)
-        fig, ax = plt.subplots(figsize=(4, 3))
+        fig, ax = plt.subplots(figsize=(3.2, 2.6), dpi=150)
         sns.heatmap(
             cm, annot=True, fmt="d", cmap="Blues",
             xticklabels=["No Churn", "Churn"],
-            yticklabels=["No Churn", "Churn"], ax=ax
+            yticklabels=["No Churn", "Churn"], ax=ax,
+            annot_kws={"size": 9}, cbar=False
         )
-        ax.set_xlabel("Predicted")
-        ax.set_ylabel("Actual")
-        st.pyplot(fig)
+        ax.set_xlabel("Predicted", fontsize=9)
+        ax.set_ylabel("Actual", fontsize=9)
+        ax.tick_params(labelsize=8)
+        fig.tight_layout()
+
+        cm_col, _ = st.columns([1, 2])  # confine the plot to ~1/3 of the wide layout
+        with cm_col:
+            st.pyplot(fig, use_container_width=False)
 
         st.subheader("📄 Classification Report")
         report = classification_report(
