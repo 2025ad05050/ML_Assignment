@@ -125,6 +125,8 @@ streamlit run app.py
 
 > [Streamlit App Link](https://mlassignment-4zvxh5jc88xhostqqhncfy.streamlit.app/)
 ## BITS Virtual Lab Execution Screenshot
-![img.png](img.png)
+<img width="623" height="324" alt="image" src="https://github.com/user-attachments/assets/164122ac-b585-4ea0-a30d-0af38ed41ee9" />
+
 ## Local Host Execution
-![img_1.png](img_1.png)
+<img width="623" height="324" alt="image" src="https://github.com/user-attachments/assets/fdd566cc-a897-413c-86fc-0bcfb8bd8452" />
+
